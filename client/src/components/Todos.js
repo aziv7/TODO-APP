@@ -23,7 +23,14 @@ const Todos = ({ history }) => {
   const [todoEdit, setTodoEdit] = useState({ title: '', status: false });
 
   function openModal(todo) {
-    if (!todo) setTodoEdit({ title: '', status: false, adding: true });
+    if (!todo)
+      setTodoEdit({
+        title: '',
+        status: false,
+        adding: true,
+        description: '',
+        deadline: new Date(),
+      });
     else setTodoEdit({ ...todo });
 
     setIsOpen(true);
@@ -55,7 +62,12 @@ const Todos = ({ history }) => {
         'content-type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ status: todoEdit.status, title: todoEdit.title }),
+      body: JSON.stringify({
+        status: todoEdit.status,
+        title: todoEdit.title,
+        deadline: todoEdit.deadline,
+        description: todoEdit.description,
+      }),
     });
     const data = await res.json();
 
@@ -70,7 +82,12 @@ const Todos = ({ history }) => {
         'content-type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ status: todoEdit.status, title: todoEdit.title }),
+      body: JSON.stringify({
+        status: todoEdit.status,
+        title: todoEdit.title,
+        deadline: todoEdit.deadline,
+        description: todoEdit.description,
+      }),
     });
     const data = await res.json();
 
@@ -113,7 +130,7 @@ const Todos = ({ history }) => {
         {user && user.name} Todos{' '}
         <button
           type='button'
-          class='btn btn-success'
+          className='btn btn-success'
           onClick={(ev) => {
             ev.preventDefault();
             openModal(null);
@@ -121,7 +138,7 @@ const Todos = ({ history }) => {
         >
           +
         </button>
-        <button type='button' class='btn btn-danger' onClick={leave}>
+        <button type='button' className='btn btn-danger' onClick={leave}>
           Disconnect
         </button>
       </div>
@@ -130,6 +147,7 @@ const Todos = ({ history }) => {
           <tr>
             <th scope='col'>#</th>
             <th scope='col'>Title</th>
+            <th scope='col'>Description</th>
             <th scope='col'>Status</th>
             <th scope='col'>Deadline</th>
             <th scope='col'>Action</th>
@@ -150,8 +168,11 @@ const Todos = ({ history }) => {
                     <span className='badge badge-info'>On progress</span>
                   )}
                 </td>
+                <td>
+                  <p>{e.description}</p>
+                </td>
                 <td>{e.status ? <p>Done</p> : <p>On progress</p>}</td>
-                <td>@mdo</td>
+                <td>{e.deadline}</td>
                 <td>
                   <button
                     type='button'
@@ -178,7 +199,7 @@ const Todos = ({ history }) => {
         style={customStyles}
         contentLabel='Example Modal'
       >
-        <div class='container-fluid col-12'>
+        <div className='container-fluid col-12'>
           <form>
             <div className='form-group'>
               <label htmlFor='Title'>Title</label>
@@ -193,6 +214,35 @@ const Todos = ({ history }) => {
                 id='Title'
                 aria-describedby='emailHelp'
                 placeholder='Title'
+              />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='Description'>Description</label>
+              <input
+                name='description'
+                onChange={(e) =>
+                  setTodoEdit({ ...todoEdit, description: e.target.value })
+                }
+                value={todoEdit.description}
+                type='text'
+                className='form-control'
+                id='Description'
+                aria-describedby='Description'
+                placeholder='Description'
+              />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='Deadline'>Deadline</label>
+              <input
+                name='deadline'
+                onChange={(e) =>
+                  setTodoEdit({ ...todoEdit, deadline: e.target.value })
+                }
+                value={todoEdit.deadline}
+                type='date'
+                className='form-control'
+                id='Description'
+                aria-describedby='Deadline'
               />
             </div>
             <div className='form-group flex'>

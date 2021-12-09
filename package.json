@@ -1,0 +1,32 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "MERN TODO web app",
+  "main": "server.js",
+  "scripts": {
+    "dev": "cd backend && nodemon server.js",
+    "client":"cd client && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/aziv7/TODO-APP.git"
+  },
+  "author": "Aziz Jerbi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aziv7/TODO-APP/issues"
+  },
+  "homepage": "https://github.com/aziv7/TODO-APP#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
