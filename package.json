@@ -4,6 +4,7 @@
   "description": "MERN TODO web app",
   "main": "server.js",
   "scripts": {
+    "start": "cd backend && node server.js",
     "dev": "cd backend && nodemon server.js",
     "client":"cd client && npm start"
   },
