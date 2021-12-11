@@ -32,7 +32,7 @@ const Register = ({ history }) => {
   return (
     <form>
       <div className='form-group'>
-        <label htmlFor='name'>Email address</label>
+        <label htmlFor='name'>Nom</label>
         <input
           value={userForm.name}
           onChange={(e) => {

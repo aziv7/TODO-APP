@@ -94,10 +94,11 @@ const Todos = ({ history }) => {
     const arr = todos.map((e) => {
       if (e._id === data._id) {
         e = data;
-        return e;
       }
+      return e;
     });
-    setTodos(arr);
+
+    setTodos([...arr]);
     closeModal();
   };
 
@@ -155,42 +156,45 @@ const Todos = ({ history }) => {
         </thead>
         <tbody>
           {todos &&
-            todos.map((e, i) => (
-              <tr key={e._id}>
-                <th scope='row'>{i}</th>
-                <td>
-                  {e.title}
-                  {e.status ? (
-                    <span className='badge badge-success'>
-                      <p>Done</p>{' '}
-                    </span>
-                  ) : (
-                    <span className='badge badge-info'>On progress</span>
-                  )}
-                </td>
-                <td>
-                  <p>{e.description}</p>
-                </td>
-                <td>{e.status ? <p>Done</p> : <p>On progress</p>}</td>
-                <td>{e.deadline}</td>
-                <td>
-                  <button
-                    type='button'
-                    onClick={() => openModal(e)}
-                    className='btn btn-info mx-2'
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type='button'
-                    className='btn btn-danger mr-2'
-                    onClick={(ev) => removeTodo(ev, e)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            todos.map(
+              (e, i) =>
+                e && (
+                  <tr key={e._id}>
+                    <th scope='row'>{i}</th>
+                    <td>
+                      {e && e.title}
+                      {e && e.status ? (
+                        <span className='badge badge-success'>
+                          <p>Done</p>{' '}
+                        </span>
+                      ) : (
+                        <span className='badge badge-info'>On progress</span>
+                      )}
+                    </td>
+                    <td>
+                      <p>{e && e.description}</p>
+                    </td>
+                    <td>{e && e.status ? <p>Done</p> : <p>On progress</p>}</td>
+                    <td>{e && e.deadline}</td>
+                    <td>
+                      <button
+                        type='button'
+                        onClick={() => openModal(e)}
+                        className='btn btn-info mx-2'
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type='button'
+                        className='btn btn-danger mr-2'
+                        onClick={(ev) => removeTodo(ev, e)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                )
+            )}
         </tbody>
       </table>
       <Modal

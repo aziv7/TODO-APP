@@ -9,8 +9,8 @@
     "client":"cd client && npm start"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://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@github.com/aziv7/TODO-APP.git"
+    "type": "git"
+   
   },
   "author": "Aziz Jerbi",
   "license": "ISC",
